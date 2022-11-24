@@ -1,10 +1,3 @@
-;-------------------------------------------------------------------------------
-; Aluno 1: Daniel Erick Sanchez Trujillo (MatrÌcula: 180039229)
-; Aluno 2: Ot·vio Henrique de Freitas Rabelo (MatrÌcula: 200062603)
-; Disciplina: LaboratÛrio de Sistemas Microprocessados
-; Professor: Daniel CafÈ
-; Problema do MÛdulo 1
-;-------------------------------------------------------------------------------
 ; MSP430 Assembler Code Template for use with TI Code Composer Studio
 ;
 ;
@@ -32,8 +25,8 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 
 INICIA_CIFRA:
 			push	MSG_TAM					; Coloca no topo da pilha o valor de MSG_TAM
-			mov		#MSG_CLARA,R5			; Coloca em R5 o endereÁo do primeiro elemento de MSG_CLARA
-			mov		#MSG_CIFR,R6			; Coloca em R6 o endereÁo do primeiro elemento de MSG_CIFR
+			mov		#MSG_CLARA,R5			; Coloca em R5 o endere√ßo do primeiro elemento de MSG_CLARA
+			mov		#MSG_CIFR,R6			; Coloca em R6 o endere√ßo do primeiro elemento de MSG_CIFR
 			jmp		INICIA_ROTORES			; Vai para a label INICIA_ROTORES
 			nop
 
@@ -42,18 +35,18 @@ CONTINUA_CIFRA:
 
 INICIA_DECIFRA:
 			pop		MSG_TAM					; Coloca em MSG_TAM o valor do topo da pilha
-			mov		#MSG_CIFR,R5			; Coloca em R4 o endereÁo do primeiro elemento de MSG_CIFR
-			mov		#MSG_DECIFR,R6			; Coloca em R5 o endereÁo do primeiro elemento de MSG_DECIFR
+			mov		#MSG_CIFR,R5			; Coloca em R4 o endere√ßo do primeiro elemento de MSG_CIFR
+			mov		#MSG_DECIFR,R6			; Coloca em R5 o endere√ßo do primeiro elemento de MSG_DECIFR
 			jmp		REINICIA_ROTOR1
 			nop
 
 CONTINUA_DECIFRA:
 			call	#ENIGMA					; Chama a subrotina ENIGMA para decifrar e mensagem cifrada
-			jmp		$						; Trava a execuÁ„o do cÛdigo
+			jmp		$						; Trava a execu√ß√£o do c√≥digo
 			nop								; Nenhum comando
 
 INICIA_ROTORES:
-			mov		#CHAVE,R4				; Coloca em R4 o endereÁo do primeiro elemento da CHAVE
+			mov		#CHAVE,R4				; Coloca em R4 o endere√ßo do primeiro elemento da CHAVE
 			mov		@R4+,R8					; Coloca o valor de (R4) (Rotor da Esquerda) em R8 e incrementa R4
 			mov		@R4+,R9					; Coloca o valor de (R4) (Config. Rotor Esquerda) em R9 e incrementa R4
 			mov		@R4+,R10				; Coloca o valor de (R4) (Rotor Central) em R10 e incrementa R4
@@ -66,34 +59,34 @@ INICIA_ROTORES:
 			jnz		ROTOR1					; Se diferente de zero, vai para a label ROTOR1
 
 CONTINUA1:
-			add		R15,R8					; Soma a R8 a quantidade de elementos que devem ser pulados a partir do primeiro Ìndice de RT1
+			add		R15,R8					; Soma a R8 a quantidade de elementos que devem ser pulados a partir do primeiro √≠ndice de RT1
 			clr		R15						; Zera o valor de R15
 			dec		R10						; Decrementa o valor de R10
 			jnz		ROTOR2					; Se diferente de zero, vai para a label ROTOR2
 
 CONTINUA2:
-			add		R15,R10					; Soma a R10 a quantidade de elementos que devem ser pulados a partir do primeiro Ìndice de RT1
+			add		R15,R10					; Soma a R10 a quantidade de elementos que devem ser pulados a partir do primeiro √≠ndice de RT1
 			clr		R15						; Zera o valor de R15
 			dec		R12						; Decrementa o valor de R12
 			jnz		ROTOR3					; Se diferente de zero, vai para a label ROTOR3
 
 CONTINUA3:
-			add		R15,R12					; Soma a R12 a quantidade de elementos que devem ser pulados a partir do primeiro Ìndice de RT1
-			mov		#RT1,R15				; Coloca o Ìndice do primeiro elemento de RT1 em R15
-			add		R15,R8					; Coloca em R8 o Ìndice inicial do rotor da esquerda escolhido
-			add		R15,R10					; Coloca em R10 o Ìndice inicial do rotor central escolhido
-			add		R15,R12					; Coloca em R12 o Ìndice inicial do rotor da direita escolhido
+			add		R15,R12					; Soma a R12 a quantidade de elementos que devem ser pulados a partir do primeiro √≠ndice de RT1
+			mov		#RT1,R15				; Coloca o √≠ndice do primeiro elemento de RT1 em R15
+			add		R15,R8					; Coloca em R8 o √≠ndice inicial do rotor da esquerda escolhido
+			add		R15,R10					; Coloca em R10 o √≠ndice inicial do rotor central escolhido
+			add		R15,R12					; Coloca em R12 o √≠ndice inicial do rotor da direita escolhido
 			clr		R15						; Zera o valor de R15
 			dec		R14						; Decrementa o valor de R14
-			jz		TRAMA1					; Se igual a zero, o refletor escolhido foi o primeiro, portanto j· se inicia a trama inicial dos rotores
+			jz		TRAMA1					; Se igual a zero, o refletor escolhido foi o primeiro, portanto j√° se inicia a trama inicial dos rotores
 
 REFLETOR:
 			add		#26,R15					; Soma 26 a R15
 			dec		R14						; Decrementa o valor de R14
 			jnz		REFLETOR				; Se diferente de zero, retorna para a label REFLETOR
-			add		R15,R14					; Coloca em R14 a quantidade de elementos que devem ser pulados a partir do primeiro Ìndice de RF1
-			mov		#RF1,R15				; Coloca o Ìndice do primeiro elemento de RF1 em R15
-			add		R15,R14					; Coloca em R14 o Ìndice inicial do refletor escolhido
+			add		R15,R14					; Coloca em R14 a quantidade de elementos que devem ser pulados a partir do primeiro √≠ndice de RF1
+			mov		#RF1,R15				; Coloca o √≠ndice do primeiro elemento de RF1 em R15
+			add		R15,R14					; Coloca em R14 o √≠ndice inicial do refletor escolhido
 			clr		R15						; Zera o valor de R15
 
 TRAMA1:
@@ -108,8 +101,8 @@ SUB_TRAMA1:
 			jnz		SUB_TRAMA1				; Se diferente de zero, volta para a label SUB_TRAMA1
 			pop		R8						; Coloca em R8 o valor do topo da pilha
 			pop		AUX						; Coloca em AUX o valor do topo da pilha
-			mov.b	R15,25(R8)				; Coloca o valor de R15 na ˙ltima posiÁ„o do rotor da esquerda
-			dec		R9						; Decrementa o valor de R9, ou seja, foi completada uma rotaÁ„o para a esquerda
+			mov.b	R15,25(R8)				; Coloca o valor de R15 na √∫ltima posi√ß√£o do rotor da esquerda
+			dec		R9						; Decrementa o valor de R9, ou seja, foi completada uma rota√ß√£o para a esquerda
 			jnz		TRAMA1					; Se diferente de zero, volta para a label TRAMA1
 
 TRAMA2:
@@ -124,8 +117,8 @@ SUB_TRAMA2:
 			jnz		SUB_TRAMA2				; Se diferente de zero, volta para a label SUB_TRAMA2
 			pop		R10						; Coloca em R10 o valor do topo da pilha
 			pop		AUX						; Coloca em AUX o valor do topo da pilha
-			mov.b	R15,25(R10)				; Coloca o valor de R15 na ˙ltima posiÁ„o do rotor central
-			dec		R11						; Decrementa o valor de R11, ou seja, foi completada uma rotaÁ„o para a esquerda
+			mov.b	R15,25(R10)				; Coloca o valor de R15 na √∫ltima posi√ß√£o do rotor central
+			dec		R11						; Decrementa o valor de R11, ou seja, foi completada uma rota√ß√£o para a esquerda
 			jnz		TRAMA2					; Se diferente de zero, vai para a label TRAMA2
 
 TRAMA3:
@@ -140,39 +133,39 @@ SUB_TRAMA3:
 			jnz		SUB_TRAMA3				; Se diferente de zero, vai para a label SUB_TRAMA2
 			pop		R12						; Coloca em R12 o valor do topo da pilha
 			pop		AUX						; Coloca em AUX o valor do topo da pilha
-			mov.b	R15,25(R12)				; Coloca o valor de R15 na ˙ltima posiÁ„o do rotor da direita
-			dec		R13						; Decrementa o valor de R13, ou seja, foi completada uma rotaÁ„o para a esquerda
+			mov.b	R15,25(R12)				; Coloca o valor de R15 na √∫ltima posi√ß√£o do rotor da direita
+			dec		R13						; Decrementa o valor de R13, ou seja, foi completada uma rota√ß√£o para a esquerda
 			jnz		TRAMA3					; Se diferente de zero, vai para a label TRAMA3
 			jmp		CONTINUA_CIFRA			; Com todos os rotores e o refletor configurados, vai para a label CONTINUA_CIFRA
-			nop								; Nenhuma instruÁ„o
+			nop								; Nenhuma instru√ß√£o
 
 ROTOR1:
 			add		#26,R15					; Soma 26 ao valor de R15
 			dec		R8						; Decrementa o valor de R8
 			jnz		ROTOR1					; Se diferente de zero, volta para a subrotina ROTOR1
 			jmp		CONTINUA1				; Vai para a label CONTINUA1
-			nop								; Nenhuma instruÁ„o
+			nop								; Nenhuma instru√ß√£o
 
 ROTOR2:
 			add		#26,R15					; Soma 26 ao valor de R15
 			dec		R10						; Decrementa o valor de R10
 			jnz		ROTOR2					; Se diferente de zero, volta para a subrotina ROTOR2
 			jmp		CONTINUA2				; Vai para a label CONTINUA2
-			nop								; Nenhuma instruÁ„o
+			nop								; Nenhuma instru√ß√£o
 
 ROTOR3:
 			add		#26,R15					; Soma 26 ao valor de R15
 			dec		R12						; Decrementa o valor de R12
 			jnz		ROTOR3					; Se diferente de zero, volta para a subrotina ROTOR3
 			jmp		CONTINUA3				; Vai para a label CONTINUA3
-			nop								; Nenhuma instruÁ„o
+			nop								; Nenhuma instru√ß√£o
 
 REINICIA_ROTOR1:
-			cmp.b	#0x0,A1					; Compara o n˙mero 0 com o valor de A1
+			cmp.b	#0x0,A1					; Compara o n√∫mero 0 com o valor de A1
 			jeq		REINICIA_ROTOR2			; Se iguais, vai para a label REINICIA_ROTOR2
 
 SALVA_VALOR1:
-			mov.b	@R8,R15					; Coloca o valor do primeiro Ìndice do rotor da esquerda em R15
+			mov.b	@R8,R15					; Coloca o valor do primeiro √≠ndice do rotor da esquerda em R15
 			push	R8						; Coloca o valor de R8 no topo da pilha
 			push	AUX						; Coloca o valor de AUX no topo da pilha
 
@@ -183,16 +176,16 @@ SUB_REINICIA_ROTOR1:
 			jnz		SUB_REINICIA_ROTOR1		; Se diferente de zero, volta para a label SUB_REINICIA_ROTOR1
 			pop		AUX						; Coloca em AUX o valor do topo da pilha
 			pop		R8						; Coloca em R8 o valor do topo da pilha
-			mov.b	R15,25(R8)				; Coloca na ˙ltima posiÁ„o do rotor da esquerda o valor de R15
+			mov.b	R15,25(R8)				; Coloca na √∫ltima posi√ß√£o do rotor da esquerda o valor de R15
 			dec		A1						; Decrementa o valor de A1
 			jnz		SALVA_VALOR1			; Se diferente de zero, volta para a label SALVA_VALOR1
 
 REINICIA_ROTOR2:
-			cmp.b	#0x0,A2					; Compara o n˙mero 0 com o valor de A2
+			cmp.b	#0x0,A2					; Compara o n√∫mero 0 com o valor de A2
 			jeq		REINICIA_ROTOR3			; Se iguais, vai para a label REINICIA_ROTOR3
 
 SALVA_VALOR2:
-			mov.b	@R10,R15				; Coloca o valor do primeiro Ìndice do rotor central em R15
+			mov.b	@R10,R15				; Coloca o valor do primeiro √≠ndice do rotor central em R15
 			push	R10						; Coloca o valor de R10 no topo da pilha
 			push	AUX						; Coloca o valor de AUX no topo da pilha
 
@@ -203,16 +196,16 @@ SUB_REINICIA_ROTOR2:
 			jnz		SUB_REINICIA_ROTOR2		; Se diferente de zero, volta para a label SUB_REINICIA_ROTOR2
 			pop		AUX						; Coloca em AUX o valor do topo da pilha
 			pop		R10						; Coloca em R10 o valor do topo da pilha
-			mov.b	R15,25(R10)				; Coloca na ˙ltima posiÁ„o do rotor central o valor de R15
+			mov.b	R15,25(R10)				; Coloca na √∫ltima posi√ß√£o do rotor central o valor de R15
 			dec		A2						; Decrementa o valor de A2
 			jnz		SALVA_VALOR2			; Se diferente de zero, volta para a label SALVA_VALOR2
 
 REINICIA_ROTOR3:
-			cmp.b	#0x0,A3					; Compara o n˙mero 0 com o valor de A3
+			cmp.b	#0x0,A3					; Compara o n√∫mero 0 com o valor de A3
 			jeq		CONTINUA_DECIFRA		; Se iguais, vai para a label CONTINUA_DECIFRA
 
 SALVA_VALOR3:
-			mov.b	@R12,R15				; Coloca o valor do primeiro Ìndice do rotor da direita em R15
+			mov.b	@R12,R15				; Coloca o valor do primeiro √≠ndice do rotor da direita em R15
 			push	R12						; Coloca o valor de R12 no topo da pilha
 			push	AUX						; Coloca o valor de AUX no topo da pilha
 
@@ -223,11 +216,11 @@ SUB_REINICIA_ROTOR3:
 			jnz		SUB_REINICIA_ROTOR3		; Se diferente de zero, volta para a label SUB_REINICIA_ROTOR3
 			pop		AUX						; Coloca em AUX o valor do topo da pilha
 			pop		R12						; Coloca em R12 o valor do topo da pilha
-			mov.b	R15,25(R12)				; Coloca na ˙ltima posiÁ„o do rotor da direita o valor de R15
+			mov.b	R15,25(R12)				; Coloca na √∫ltima posi√ß√£o do rotor da direita o valor de R15
 			dec		A3						; Decrementa o valor de A3
 			jnz		SALVA_VALOR3			; Se diferente de zero, volta para a label SALVA_VALOR3
 			jmp		CONTINUA_DECIFRA		; Vai para a label CONTINUA_DECIFRA
-			nop								; Nenhuma instruÁ„o
+			nop								; Nenhuma instru√ß√£o
 
 ENIGMA:
 			clr		R9						; Zera o valor de R9
@@ -242,131 +235,131 @@ ENIGMA:
 
 CODIFICA:
 			mov.b	@R5,R15					; Coloca em R15 o valor do caractere de (R5)
-			sub.b	#0x41,R15				; Determina a dist‚ncia do caractere R15 para a letra A
-			add		R8,R15					; Soma o Ìndice de memÛria R8 ao valor da diferenÁa calculada acima
-			mov.b	@R15,R15				; Coloca em R15 o valor presente no Ìndice da memÛria do valor calculado acima (rotor 1)
-			add		R10,R15					; Soma o Ìndice de memÛria R10 ao valor retornado do rotor 1
-			mov.b	@R15,R15				; Coloca em R15 o valor presente no Ìndice da memÛria do valor calculado acima (rotor 2)
-			add		R12,R15					; Soma o Ìndice de memÛria R12 ao valor retornado do rotor 2
-			mov.b	@R15,R15				; Coloca em R15 o valor presente no Ìndice da memÛria do valor calculado acima (rotor 3)
-			add		R14,R15					; Soma o Ìndice de memÛria R12 ao valor retornado do rotor 3
-			mov.b	@R15,R15				; Coloca em R15 o valor presente no Ìndice da memÛria do valor calculado acima (refletor)
-			push	R12						; Coloca o valor do Ìndice do primeiro elemento do rotor da direita no topo da pilha
+			sub.b	#0x41,R15				; Determina a dist√¢ncia do caractere R15 para a letra A
+			add		R8,R15					; Soma o √≠ndice de mem√≥ria R8 ao valor da diferen√ßa calculada acima
+			mov.b	@R15,R15				; Coloca em R15 o valor presente no √≠ndice da mem√≥ria do valor calculado acima (rotor 1)
+			add		R10,R15					; Soma o √≠ndice de mem√≥ria R10 ao valor retornado do rotor 1
+			mov.b	@R15,R15				; Coloca em R15 o valor presente no √≠ndice da mem√≥ria do valor calculado acima (rotor 2)
+			add		R12,R15					; Soma o √≠ndice de mem√≥ria R12 ao valor retornado do rotor 2
+			mov.b	@R15,R15				; Coloca em R15 o valor presente no √≠ndice da mem√≥ria do valor calculado acima (rotor 3)
+			add		R14,R15					; Soma o √≠ndice de mem√≥ria R12 ao valor retornado do rotor 3
+			mov.b	@R15,R15				; Coloca em R15 o valor presente no √≠ndice da mem√≥ria do valor calculado acima (refletor)
+			push	R12						; Coloca o valor do √≠ndice do primeiro elemento do rotor da direita no topo da pilha
 
 PROCURA_ROT3:
 			cmp.b	R15,0(R12)				; Compara o valor selecionado do refletor com o elemento (R12 + 0) do rotor da direita
 			jeq		ENCONTRA_ROT3			; Se iguais, vai para a label ENCONTRA_ROT3
 			inc		R12						; Incrementa o valor de R12
 			jmp		PROCURA_ROT3			; Retorna para a label PROCURA_ROT3
-			nop								; Nenhuma instruÁ„o
+			nop								; Nenhuma instru√ß√£o
 
 ENCONTRA_ROT3:
 			pop		R4						; Coloca em R4 o valor do topo da pilha
-			sub		R4,R12					; Determina a dist‚ncia entre o Ìndice do elemento encontrado e o primeiro elemento do rotor da direita
+			sub		R4,R12					; Determina a dist√¢ncia entre o √≠ndice do elemento encontrado e o primeiro elemento do rotor da direita
 			mov		R12,R15					; Coloca o valor calculado acima em R15
-			mov		R4,R12					; Coloca o valor do Ìndice inicial do rotor da direita em R12
-			push	R10						; Coloca no topo da pilha o valor do primeiro Ìndice do rotor central
+			mov		R4,R12					; Coloca o valor do √≠ndice inicial do rotor da direita em R12
+			push	R10						; Coloca no topo da pilha o valor do primeiro √≠ndice do rotor central
 
 PROCURA_ROT2:
 			cmp.b	R15,0(R10)				; Compara o valor selecionado do rotor da direita com o elemento (R10 + 0) do rotor central
 			jeq		ENCONTRA_ROT2			; Se iguais, vai para a label ENCONTRA_ROT2
 			inc		R10						; Incrementa o valor de R10
 			jmp		PROCURA_ROT2			; Retorna para a label PROCURA_ROT2
-			nop								; Nenhuma instruÁ„o
+			nop								; Nenhuma instru√ß√£o
 
 ENCONTRA_ROT2:
 			pop		R4						; Coloca em R4 o valor do topo da pilha
-			sub		R4,R10					; Determina a dist‚ncia entre o Ìndice do elemento encontrado e o primeiro elemento do rotor central
+			sub		R4,R10					; Determina a dist√¢ncia entre o √≠ndice do elemento encontrado e o primeiro elemento do rotor central
 			mov		R10,R15					; Coloca o valor calculado acima em R15
-			mov		R4,R10					; Coloca o valor do Ìndice inicial do rotor central em R12
-			push	R8						; Coloca no topo da pilha o valor do primeiro Ìndice do rotor da esquerda
+			mov		R4,R10					; Coloca o valor do √≠ndice inicial do rotor central em R12
+			push	R8						; Coloca no topo da pilha o valor do primeiro √≠ndice do rotor da esquerda
 
 PROCURA_ROT1:
 			cmp.b	R15,0(R8)				; Compara o valor selecionado do rotor central com o elemento (R8 + 0) do rotor da esquerda
 			jeq		ENCONTRA_ROT1			; Se iguais, vai para a label ENCONTRA_ROT1
 			inc		R8						; Incrementa o valor de R8
 			jmp		PROCURA_ROT1			; Retorna para a label PROCURA_ROT1
-			nop								; Nenhuma instruÁ„o
+			nop								; Nenhuma instru√ß√£o
 
 ENCONTRA_ROT1:
 			pop		R4						; Coloca em R4 o valor do topo da pilha
-			sub		R4,R8					; Determina a dist‚ncia entre o Ìndice do elemento encontrado e o primeiro elemento do rotor da esquerda
+			sub		R4,R8					; Determina a dist√¢ncia entre o √≠ndice do elemento encontrado e o primeiro elemento do rotor da esquerda
 			mov		R8,R15					; Coloca o valor calculado acima em R15
-			mov		R4,R8					; Coloca o valor do Ìndice inicial do rotor da esquerda em R8
-			add.b	#0x41,R15				; Soma o valor de R15 ‡ letra A
-			mov.b	R15,0(R6)				; Coloca no Ìndice (R6 + 0) da memÛria	a letra resultante da operaÁ„o acima
+			mov		R4,R8					; Coloca o valor do √≠ndice inicial do rotor da esquerda em R8
+			add.b	#0x41,R15				; Soma o valor de R15 √† letra A
+			mov.b	R15,0(R6)				; Coloca no √≠ndice (R6 + 0) da mem√≥ria	a letra resultante da opera√ß√£o acima
 
 ROTACIONA_ROTOR1:
-			mov.b	25(R8),R15				; Coloca o valor do ˙ltimo elemento do rotor da esquerda em R15
+			mov.b	25(R8),R15				; Coloca o valor do √∫ltimo elemento do rotor da esquerda em R15
 			push	AUX						; Coloca o valor de AUX no topo da pilha
 			push	R8						; Coloca o valor de R8 no topo da pilha
-			add		#24,R8					; Soma a quantidade de vezes que o loop deve ocorrer ao valor do Ìndice inicial do rotor da esquerda
+			add		#24,R8					; Soma a quantidade de vezes que o loop deve ocorrer ao valor do √≠ndice inicial do rotor da esquerda
 
 SUB_ROTACIONA_ROTOR1:
-			mov.b	0(R8),1(R8)				; Coloca o valor do elemento do Ìndice (R8 + 0) em (R8 + 1)
+			mov.b	0(R8),1(R8)				; Coloca o valor do elemento do √≠ndice (R8 + 0) em (R8 + 1)
 			dec		R8						; Decrementa o valor de R8
 			dec		AUX						; Decrementa o valor de AUX
 			jnz		SUB_ROTACIONA_ROTOR1	; Se diferente de zero, retorna para a label SUB_ROTACIONA_ROTOR1
 			pop		R8						; Coloca em R8 o valor do topo da pilha
 			pop		AUX						; Coloca em AUX o valor do topo da pilha
-			mov.b	R15,0(R8)				; Coloca no primeiro Ìndice do rotor da esquerda o valor de R15
+			mov.b	R15,0(R8)				; Coloca no primeiro √≠ndice do rotor da esquerda o valor de R15
 			inc		A1						; Incrementa o contador A1
-			cmp.b	#0x1A,A1				; Compara o valor de A1 com o n˙mero 0x1A (26)
+			cmp.b	#0x1A,A1				; Compara o valor de A1 com o n√∫mero 0x1A (26)
 			jeq		ROTACIONA_ROTOR2		; Se forem iguais, vai para a label	ROTACIONA_ROTOR2
 			jmp		FINAL					; Salta para a label FINAL
-			nop								; Nenhuma instruÁ„o
+			nop								; Nenhuma instru√ß√£o
 
 ROTACIONA_ROTOR2:
 			clr		A1						; Zera o valor de A1
-			mov.b	25(R10),R15				; Coloca o valor do ˙ltimo elemento do rotor central em R15
+			mov.b	25(R10),R15				; Coloca o valor do √∫ltimo elemento do rotor central em R15
 			push	AUX						; Coloca o valor de AUX no topo da pilha
 			push	R10						; Coloca o valor de R10 no topo da pilha
-			add		#24,R10					; Soma a quantidade de vezes que o loop deve ocorrer ao valor do Ìndice inicial do rotor central
+			add		#24,R10					; Soma a quantidade de vezes que o loop deve ocorrer ao valor do √≠ndice inicial do rotor central
 
 SUB_ROTACIONA_ROTOR2:
-			mov.b	0(R10),1(R10)			; Coloca o valor do elemento do Ìndice (R10 + 0) em (R10 + 1)
+			mov.b	0(R10),1(R10)			; Coloca o valor do elemento do √≠ndice (R10 + 0) em (R10 + 1)
 			dec		R10						; Decrementa o valor de R10
 			dec		AUX						; Decrementa o valor de AUX
 			jnz		SUB_ROTACIONA_ROTOR2	; Se diferente de zero, retorna para a label SUB_ROTACIONA_ROTOR2
 			pop		R10						; Coloca em R10 o valor do topo da pilha
 			pop		AUX						; Coloca em AUX o valor do topo da pilha
-			mov.b	R15,0(R10)				; Coloca no primeiro Ìndice do rotor central o valor de R15
+			mov.b	R15,0(R10)				; Coloca no primeiro √≠ndice do rotor central o valor de R15
 			inc		A2						; Incrementa o contador A2
-			cmp.b	#0x1A,A2				; Compara o valor de A2 com o n˙mero 0x1A (26)
+			cmp.b	#0x1A,A2				; Compara o valor de A2 com o n√∫mero 0x1A (26)
 			jeq		ROTACIONA_ROTOR3		; Se forem iguais, vai para a label	ROTACIONA_ROTOR3
 			jmp		FINAL					; Salta para a label FINAL
-			nop								; Nenhuma instruÁ„o
+			nop								; Nenhuma instru√ß√£o
 
 ROTACIONA_ROTOR3:
 			clr		A2						; Zera o valor de A2
-			mov.b	25(R12),R15				; Coloca o valor do ˙ltimo elemento do rotor da direita em R15
+			mov.b	25(R12),R15				; Coloca o valor do √∫ltimo elemento do rotor da direita em R15
 			push	AUX						; Coloca o valor de AUX no topo da pilha
 			push	R12						; Coloca o valor de R12 no topo da pilha
-			add		#24,R12					; Soma a quantidade de vezes que o loop deve ocorrer ao valor do Ìndice inicial do rotor da direita
+			add		#24,R12					; Soma a quantidade de vezes que o loop deve ocorrer ao valor do √≠ndice inicial do rotor da direita
 
 SUB_ROTACIONA_ROTOR3:
-			mov.b	0(R12),1(R12)			; Coloca o valor do elemento do Ìndice (R12 + 0) em (R12 + 1)
+			mov.b	0(R12),1(R12)			; Coloca o valor do elemento do √≠ndice (R12 + 0) em (R12 + 1)
 			dec		R12						; Decrementa o valor de R12
 			dec		AUX						; Decrementa o valor de AUX
 			jnz		SUB_ROTACIONA_ROTOR3	; Se diferente de zero, retorna para a label SUB_ROTACIONA_ROTOR3
 			pop		R12						; Coloca em R12 o valor do topo da pilha
 			pop		AUX						; Coloca em AUX o valor do topo da pilha
-			mov.b	R15,0(R12)				; Coloca no primeiro Ìndice do rotor da direita o valor de R15
+			mov.b	R15,0(R12)				; Coloca no primeiro √≠ndice do rotor da direita o valor de R15
 			inc		A3						; Incrementa o valor de A3
-			cmp.b	#0x1A,A3				; Compara o valor de A3 com o n˙mero 0x1A (26)
+			cmp.b	#0x1A,A3				; Compara o valor de A3 com o n√∫mero 0x1A (26)
 			jeq		ZERA_A3					; Se forem iguais, vai para a label	ZERA_A3
 			jmp		FINAL					; Salta para a label FINAL
-			nop								; Nenhuma instruÁ„o
+			nop								; Nenhuma instru√ß√£o
 
 ZERA_A3:
 			clr		A3						; Zera o valor de A3
 			jmp		FINAL					; Salta para a label FINAL
-			nop								; Nenhuma instruÁ„o
+			nop								; Nenhuma instru√ß√£o
 
 ESPECIAL:
-			mov.b	R7,0(R6)				; Coloca na posiÁ„o de memÛria (R6 + 0) o valor de R7, o caractere diferente de uma letra maiuscula
+			mov.b	R7,0(R6)				; Coloca na posi√ß√£o de mem√≥ria (R6 + 0) o valor de R7, o caractere diferente de uma letra maiuscula
 			jmp		FINAL					; Salta para a label FINAL
-			nop								; Nenhuma instruÁ„o
+			nop								; Nenhuma instru√ß√£o
 
 FINAL:
 			inc		R5						; Incrementa o valor de R5
@@ -380,7 +373,7 @@ FINAL:
 ;-------------------------------------------------------------------------------
             .global __STACK_END
             .sect   .stack
-            .data							; Acesso ‡ memÛria RAM;
+            .data							; Acesso √† mem√≥ria RAM;
 
 ;-------------------------------------------------------------------------------
 ; ***** Chave do problema *****
@@ -388,23 +381,23 @@ FINAL:
 ; Formato da chave:
 ;-------------------------------------------------------------------------------
 ; CHAVE:	A, B, C, D, E, F, G
-; A = n˙mero do rotor ‡ esquerda e B = sua configuraÁ„o
-; C = n˙mero do rotor central e D = sua configuraÁ„o
-; E = n˙mero do rotor ‡ direita e F = sua configuraÁ„o
-; G = n˙mero do refletor
+; A = n√∫mero do rotor √† esquerda e B = sua configura√ß√£o
+; C = n√∫mero do rotor central e D = sua configura√ß√£o
+; E = n√∫mero do rotor √† direita e F = sua configura√ß√£o
+; G = n√∫mero do refletor
 ;-------------------------------------------------------------------------------
 
 CHAVE:		.word	2, 4, 5, 8, 3, 3, 2
 
 ;-------------------------------------------------------------------------------
-; ***** ¡rea de dados do problema *****
+; ***** √Årea de dados do problema *****
 ;-------------------------------------------------------------------------------
 
 RT_TAM:		.word	26						; Tamanho dos rotores
 RT_QTD:		.word	05						; Quantidade de rotores
 RF_QTD:		.word	03						; Quantidade de refletores
 
-VAZIO:		.space	12						; Facilitador do endereÁo do rotor 1
+VAZIO:		.space	12						; Facilitador do endere√ßo do rotor 1
 
 ROTORES:
 
@@ -443,7 +436,7 @@ RF3:
 			.byte	25, 8, 23, 6, 11, 4, 3, 12, 0, 9, 15, 10, 13
 
 ;-------------------------------------------------------------------------------
-; ***** ¡rea das mensagens em claro, cifrada e decifrada *****
+; ***** √Årea das mensagens em claro, cifrada e decifrada *****
 ;-------------------------------------------------------------------------------
 
 MSG_CLARA:
@@ -462,14 +455,14 @@ MSG_DECIFR:
 			.byte	"ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ",0
 
 ;-------------------------------------------------------------------------------
-; ***** Vari·veis do cÛdigo *****
+; ***** Vari√°veis do c√≥digo *****
 ;-------------------------------------------------------------------------------
 
 MSG_TAM:	.word	159						; Tamanho da mensagem
 AUX:		.word	25						; Auxiliar para a trama dos rotores
-A1:			.word	0						; Auxiliar para medir a quantidade de rotaÁıes do rotor 1
-A2:			.word	0						; Auxiliar para medir a quantidade de rotaÁıes do rotor 2
-A3:			.word	0						; Auxiliar para medir a quantidade de rotaÁıes do rotor 3
+A1:			.word	0						; Auxiliar para medir a quantidade de rota√ß√µes do rotor 1
+A2:			.word	0						; Auxiliar para medir a quantidade de rota√ß√µes do rotor 2
+A3:			.word	0						; Auxiliar para medir a quantidade de rota√ß√µes do rotor 3
 
 ;-------------------------------------------------------------------------------
 ; Interrupt Vectors
